@@ -74,11 +74,11 @@ def get_midpoints_recursively(pointA, pointB, num_passes_left, midpoints):
   return get_midpoints_recursively(pointA, new_midpoint, num_passes_left - 1, midpoints) + get_midpoints_recursively(new_midpoint, pointB, num_passes_left - 1, midpoints)
 
 
-@app.route('/get_passing_neighborhoods')
+@app.route('/get_passing_neighborhoods', methods=['POST'])
 def get_passing_neighborhoods():
   points_to_find = [get_origin_lat_and_long()]
   passing_neighborhoods = []
-  all_midpoints = get_midpoints_recursively(get_origin_lat_and_long(), get_dest_lat_and_long(), 5, [])
+  all_midpoints = get_midpoints_recursively(get_origin_lat_and_long(), get_dest_lat_and_long(), 4, [])
   for mp in all_midpoints:
     points_to_find.append(mp)
   points_to_find.append(get_dest_lat_and_long())
