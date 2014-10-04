@@ -1,7 +1,9 @@
 var map;
 var originLat, originLng, destLat, destLng;
 var originSet = false;
-var destSet = false
+var destSet = false;
+var markers = [];
+var polyline;
 function initialize() {
   var mapOptions = {
     center: { lat: 37.772807, lng: -122.41353},
@@ -10,7 +12,13 @@ function initialize() {
   map = new google.maps.Map(document.getElementById('map-canvas'),
       mapOptions);
   google.maps.event.addListener(map, 'click', function(event) {
-    marker = new google.maps.Marker({position: event.latLng, map: map});
+    handleClick(event);
+  });
+}
+
+function handleClick(event) {
+  marker = new google.maps.Marker({position: event.latLng, map: map});
+    markers.push(marker);
     lat = marker.getPosition().lat();
     lng = marker.getPosition().lng();
     if(originSet == false) {
@@ -18,7 +26,7 @@ function initialize() {
     }
     else if(destSet == false) {
       assignDest(lat, lng);
-      var polyline = new google.maps.Polyline({
+      polyline = new google.maps.Polyline({
         path: [
           new google.maps.LatLng(originLat, originLng),
           new google.maps.LatLng(destLat, destLng)
@@ -51,10 +59,24 @@ function initialize() {
     }
     //  both are assigned
     else {
+      clearMarkers();
+      clearPolyline();
+      originSet = false;
+      destSet = false;
+      handleClick(event);
       // assignOrigin(destLat, destLng);
       // assignDest(lat, lng);
     }
-  });
+}
+
+function clearMarkers() {
+  for (var i = 0; i < markers.length; i++) {
+    markers[i].setMap(null);
+  }
+}
+
+function clearPolyline() {
+  polyline.setMap(null);
 }
 
 function assignOrigin(lat, lng) {
