@@ -18,6 +18,17 @@ function initialize() {
     }
     else if(destSet == false) {
       assignDest(lat, lng);
+      var polyline = new google.maps.Polyline({
+        path: [
+          new google.maps.LatLng(originLat, originLng),
+          new google.maps.LatLng(destLat, destLng)
+        ],
+        strokeColor: "#FF0000",
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+      polyline.setMap(map);
+
       $.post(
         "/get_passing_neighborhoods",
         {
