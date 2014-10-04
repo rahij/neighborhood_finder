@@ -1,8 +1,9 @@
 <html>
   <head>
     <title>Neighborhoods</title>
-    <style type="text/css">
-    </style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
     <script type="text/javascript"
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfTSvwt0mZOkeTNCdjhoqkx-zSQx3jzAs">
@@ -10,12 +11,25 @@
     <script type="text/javascript" src="../static/js/custom.js"></script>
   </head>
   <body>
-    <div id="header">
-      <h3>Find passing neighborhoods</h3>
-    </div>
+    <nav role="navigation" class="navbar navbar-default navbar-static-top navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="#" class="navbar-brand">Find passing neighborhoods</a>
+        </div>
+      </div>
+    </nav>
     <div id="content">
       <div id="map-canvas"></div>
-      <div id="result"></div>
+      <div id="result">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Neighborhoods</h3>
+          </div>
+          <div class="panel-body" id="result-panel">
+            Click on the map to set your origin and destination
+          </div>
+        </div>
+      </div>
     </div>
   </body>
 </html>

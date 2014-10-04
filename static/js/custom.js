@@ -38,10 +38,16 @@ function initialize() {
           destLng: destLng
         }, function(data) {
           $('#loading').remove();
-          alert(data);
+          neighborhoods = $.parseJSON(data)
+          html = "<ul>";
+          for(var i=0; i<neighborhoods.length; ++i) {
+            html += "<li>" + neighborhoods[i] + "</li>";
+          }
+          html += "</ul>";
+          $('#result-panel').html(html);
         }
       );
-      $('#header').prepend("<h4 id='loading'>Loading...</h4>")
+      $('#result-panel').html("<h4 id='loading'>Loading...</h4>")
     }
     //  both are assigned
     else {
