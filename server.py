@@ -66,7 +66,7 @@ def get_dest_lat_and_long(request):
 def find_neighborhood(lat_long):
   for polygon in polygons:
     if point_in_polygon(lat_long, polygon[0]):
-        return polygon[1]
+      return polygon
   return ''
 
 def get_midpoints_recursively(pointA, pointB, num_passes_left, midpoints):
@@ -75,7 +75,6 @@ def get_midpoints_recursively(pointA, pointB, num_passes_left, midpoints):
   new_midpoint = midpoint(pointA, pointB)
   midpoints.append(new_midpoint)
   return get_midpoints_recursively(pointA, new_midpoint, num_passes_left - 1, midpoints) + get_midpoints_recursively(new_midpoint, pointB, num_passes_left - 1, midpoints)
-
 
 @app.route('/get_passing_neighborhoods', methods=['POST'])
 def get_passing_neighborhoods():
