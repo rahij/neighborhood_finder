@@ -30,7 +30,7 @@ function initialize() {
           alert(data);
         }
       );
-      $('#header').prepend("<h4>Loading...</h4>")
+      $('#header').prepend("<h4 id='loading'>Loading...</h4>")
     }
     //  both are assigned
     else {

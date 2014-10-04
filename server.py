@@ -3,6 +3,7 @@ import math
 import json
 from flask import Flask
 from flask import render_template
+from flask import request
 app = Flask(__name__)
 
 sf = shapefile.Reader("shapefiles/ZillowNeighborhoods-CA")
@@ -54,11 +55,13 @@ def midpoint(pointA, pointB):
 
   return [math.degrees(latC), math.degrees(lonC)]
 
-def get_origin_lat_and_long():
-  return [37.68149, -122.446232]
+def get_origin_lat_and_long(request):
+  # return [37.68149, -122.446232]
+  return [float(request.form['originLat']), float(request.form['originLng'])]
 
-def get_dest_lat_and_long():
-  return [37.801761,-122.408638]
+def get_dest_lat_and_long(request):
+  # return [37.801761,-122.408638]
+  return [float(request.form['destLat']), float(request.form['destLng'])]
 
 def find_neighborhood(lat_long):
   for polygon in polygons:
@@ -76,12 +79,14 @@ def get_midpoints_recursively(pointA, pointB, num_passes_left, midpoints):
 
 @app.route('/get_passing_neighborhoods', methods=['POST'])
 def get_passing_neighborhoods():
-  points_to_find = [get_origin_lat_and_long()]
+  origin_lat_long = get_origin_lat_and_long(request)
+  dest_lat_long = get_dest_lat_and_long(request)
+  points_to_find = [origin_lat_long]
   passing_neighborhoods = []
-  all_midpoints = get_midpoints_recursively(get_origin_lat_and_long(), get_dest_lat_and_long(), 4, [])
+  all_midpoints = get_midpoints_recursively(origin_lat_long, dest_lat_long, 4, [])
   for mp in all_midpoints:
     points_to_find.append(mp)
-  points_to_find.append(get_dest_lat_and_long())
+  points_to_find.append(dest_lat_long)
   for point in points_to_find:
     neighborhood = find_neighborhood(point)
     if neighborhood and neighborhood not in passing_neighborhoods:
