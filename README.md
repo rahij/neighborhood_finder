@@ -4,11 +4,14 @@ Screenshot:
 ![alt](http://i.imgur.com/NMVPl2U.png)
 
 ###Stack:
+
 - Flask (Python)
 - Google Maps API
 - jQuery
 - Dataset from Zillow
 
 ###Installation Instructions:
-- Clone the repo
-- python server.py
+  
+    git clone https://github.com/rahij/neighborhood_finder
+    pip install -r requirements.txt
+    python server.py
