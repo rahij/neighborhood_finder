@@ -56,11 +56,9 @@ def midpoint(pointA, pointB):
   return [math.degrees(latC), math.degrees(lonC)]
 
 def get_origin_lat_and_long(request):
-  # return [37.68149, -122.446232]
   return [float(request.form['originLat']), float(request.form['originLng'])]
 
 def get_dest_lat_and_long(request):
-  # return [37.801761,-122.408638]
   return [float(request.form['destLat']), float(request.form['destLng'])]
 
 def find_neighborhood(lat_long):
