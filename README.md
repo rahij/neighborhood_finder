@@ -1,4 +1,4 @@
-A web app to select any 2 points in California on a map and find out the list of neighborhoods it passes through.
+A web app to select any 2 points on a map and find out the list of neighborhoods it passes through. (As long as you have the shapefiles for that area). The current implementation uses shapefiles from Zillow for California.
 
 Screenshot:
 ![alt](http://i.imgur.com/NMVPl2U.png)
